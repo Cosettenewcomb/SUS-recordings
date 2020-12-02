@@ -1,0 +1,52 @@
+directory$ = "/Users/GraceSacco/Desktop/NLP_Final/GraceRecordingsLonger"
+directory$ = "'directory$'" + "/" 
+Create Strings as file list... list 'directory$'*.wav
+number_files = Get number of strings
+for ifile to number_files
+	select Strings list
+	sound$ = Get string... ifile
+	Read from file... 'directory$''sound$'
+	Convert to mono
+	Lengthen (overlap-add): 75, 600, 1.5
+	Write to WAV file... 'directory$''sound$'
+endfor 
+
+directory$ = "/Users/GraceSacco/Desktop/NLP_Final/GraceRecordingsNoisy"
+directory$ = "'directory$'" + "/" 
+Create Strings as file list... list 'directory$'*.wav
+number_files = Get number of strings
+for ifile to number_files
+	select Strings list
+	sound$ = Get string... ifile
+	Read from file... 'directory$''sound$'
+	Reduce noise: 0, 0, 0.025, 80, 10000, 40, -20, "spectral-subtraction"
+	Write to WAV file... 'directory$''sound$'
+endfor 
+
+
+directory$ = "/Users/GraceSacco/Desktop/NLP_Final/GraceRecordingsLouder"
+directory$ = "'directory$'" + "/" 
+Create Strings as file list... list 'directory$'*.wav
+number_files = Get number of strings
+for ifile to number_files
+	select Strings list
+	sound$ = Get string... ifile
+	Read from file... 'directory$''sound$'
+	Multiply: 1.5
+	Write to WAV file... 'directory$''sound$'
+endfor 
+
+directory$ = "/Users/GraceSacco/Desktop/NLP_Final/GraceRecordingsAll"
+directory$ = "'directory$'" + "/" 
+Create Strings as file list... list 'directory$'*.wav
+number_files = Get number of strings
+for ifile to number_files
+	select Strings list
+	sound$ = Get string... ifile
+	Read from file... 'directory$''sound$'
+	Convert to mono
+	Lengthen (overlap-add): 75, 600, 1.5
+	Reduce noise: 0, 0, 0.025, 80, 10000, 40, -20, "spectral-subtraction"
+	Multiply: 1.5
+	Write to WAV file... 'directory$''sound$'
+endfor 
